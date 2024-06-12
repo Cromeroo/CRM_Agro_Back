@@ -14,9 +14,9 @@
 
     "build": "tsc && npm run copyfiles",
 
-    "copyfiles": "npx copyfiles -u 2 src/templates/* dist/src/templates",
+    "copy-templates": "copyfiles src/templates/* dist/",
 
-    "build:dev": "npm run build && tsc -w",
+    "build:dev": "npm run copy-templates && tsc -w",
 
     "test": "echo \"Error: no test specified\" && exit 1"
 
