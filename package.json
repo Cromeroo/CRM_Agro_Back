@@ -12,7 +12,7 @@
 
     "start:dev": "nodemon dist/app.js",
 
-    "build": "tsc && npm run copyfiles",
+    "build": "tsc && npm run && npm run copyfiles",
 
     "copy-templates": "copyfiles src/templates/* dist/",
 
