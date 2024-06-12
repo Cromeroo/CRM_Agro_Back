@@ -49,6 +49,15 @@ class Server {
 
   middlewares() {
     this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: [
+          "https://crm-agro-front.vercel.app/",
+          "https://crm-agro-back.onrender.com",
+        ],
+        optionsSuccessStatus: 200,
+      })
+    );
 
     // Lectura del Body
     this.app.use(express.json());
