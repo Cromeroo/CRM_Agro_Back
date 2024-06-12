@@ -14,11 +14,12 @@
 
     "build": "tsc && npm run && npm run copyfiles",
 
-    "copy-templates": "copyfiles src/templates/* dist/",
-
     "build:dev": "npm run copy-templates && tsc -w",
 
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+
+    "copy-templates": "copyfiles src/templates/* dist/"
+
 
   },
 
