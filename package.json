@@ -16,7 +16,7 @@
 
     "copyfiles": "copyfiles -u 2 src/templates/* dist/src/templates",
 
-    "build:dev": "npx run build && tsc -w",
+    "build:dev": "npm run build && tsc -w",
 
     "test": "echo \"Error: no test specified\" && exit 1"
 
