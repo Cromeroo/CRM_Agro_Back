@@ -9,18 +9,17 @@ const ProductoSchema = new mongoose_1.Schema({
     referencia: {
         type: String,
         required: true,
-        unique: true,
     },
-    tipoDeProducto: {
-        type: String,
+    cantidad: {
+        type: Number,
+        required: true,
     },
-    cantidad: { type: Number, required: true },
-    precio: { type: Number, required: true },
-    createdAt: {
-        type: Date,
-        default: Date.now(),
+    precio: {
+        type: Number,
+        required: true,
     },
+    imagenUrl: { type: String },
 });
-const ProductoModel = (0, mongoose_1.model)("productos", ProductoSchema);
+const ProductoModel = (0, mongoose_1.model)("Producto", ProductoSchema);
 exports.default = ProductoModel;
 //# sourceMappingURL=producto.model.js.map

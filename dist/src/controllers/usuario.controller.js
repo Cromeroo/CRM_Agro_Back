@@ -120,4 +120,19 @@ const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.eliminarUsuario = eliminarUsuario;
+exports.getHistorialCompras = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { usuarioId } = req.params;
+        const usuario = yield usuario_model_1.default.findById(usuarioId).populate({
+            path: "compras",
+            populate: {
+                path: "productos.producto",
+            },
+        });
+        res.status(200).json({ compras: usuario.compras });
+    }
+    catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 //# sourceMappingURL=usuario.controller.js.map

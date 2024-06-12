@@ -14,7 +14,7 @@
 
     "build": "tsc && npm run copyfiles",
 
-  "copyfiles": "copyfiles -u 2 src/templates/* dist/src/templates",
+    "copyfiles": "copyfiles -u 2 src/templates/* dist/src/templates",
 
     "build:dev": "npm run build && tsc -w",
 

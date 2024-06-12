@@ -115,3 +115,19 @@ export const eliminarUsuario = async (req: Request, res: Response) => {
     });
   }
 };
+
+exports.getHistorialCompras = async (req: Request, res: Response) => {
+  try {
+    const { usuarioId } = req.params;
+    const usuario = await UsuarioModel.findById(usuarioId).populate({
+      path: "compras",
+      populate: {
+        path: "productos.producto",
+      },
+    });
+
+    res.status(200).json({ compras: usuario.compras });
+  } catch (error: any) {
+    res.status(500).json({ error: error.message });
+  }
+};

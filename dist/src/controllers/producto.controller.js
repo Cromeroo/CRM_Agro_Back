@@ -16,8 +16,9 @@ exports.eliminarProducto = exports.updateProducto = exports.getUnProducto = expo
 const producto_model_1 = __importDefault(require("../models/producto.model"));
 const crearProducto = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
+    const imagenUrl = req.file ? `/uploads/${req.file.filename}` : null; // Aquí guardamos solo la ruta relativa
     try {
-        const newProducto = new producto_model_1.default(Object.assign({}, body));
+        const newProducto = new producto_model_1.default(Object.assign(Object.assign({}, body), { imagenUrl }));
         const productoCreado = yield newProducto.save();
         res.status(200).json({
             ok: true,
@@ -72,7 +73,10 @@ const updateProducto = (req, res) => __awaiter(void 0, void 0, void 0, function*
     try {
         const id = req.params.id;
         const { body } = req;
-        const productoActualizado = yield producto_model_1.default.findByIdAndUpdate(id, body, {
+        const imagenUrl = req.file
+            ? `/uploads/${req.file.filename}`
+            : body.imagenUrl;
+        const productoActualizado = yield producto_model_1.default.findByIdAndUpdate(id, Object.assign(Object.assign({}, body), { imagenUrl }), {
             new: true,
         });
         res.json({
@@ -82,6 +86,7 @@ const updateProducto = (req, res) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (error) {
+        console.error(error);
         res.status(400).json({
             ok: false,
             msg: "Error al actualizar el producto",

@@ -12,7 +12,6 @@ export const validateJWT = (
   next: NextFunction
 ) => {
   const token = req.header("x-token");
-  console.log("Token recibido en el backend:", token); // Log para verificar el token recibido
 
   if (!token) {
     console.log("No hay token en la petición");

@@ -7,8 +7,10 @@ import authRoutes from "./routes/auth.route";
 import interactionRoutes from "./routes/interaction.route";
 import roleRoutes from "./routes/role.route";
 import protectedRoutes from "./routes/protected.route";
-import adminRoutes from "./routes/admin.route"; // Importar las nuevas rutas
+import adminRoutes from "./routes/admin.route";
 import bodyParser from "body-parser";
+import compraRoutes from "./routes/compra.route";
+import path from "path";
 
 class Server {
   private app: Application;
@@ -20,7 +22,8 @@ class Server {
     interaction: "/api/v1/interaction",
     role: "/api/v1/roles",
     protected: "/api/v1/protected",
-    admin: "/api/v1/admin", // Registrar la nueva ruta
+    admin: "/api/v1/admin",
+    compra: "/api/v1/producto/compras",
   };
 
   constructor() {
@@ -51,6 +54,12 @@ class Server {
     this.app.use(express.json());
     this.app.use(bodyParser.json());
 
+    // Servir archivos estáticos
+    this.app.use(
+      "/uploads",
+      express.static(path.join(__dirname, "../uploads"))
+    );
+
     this.miPrimerApi();
   }
 
@@ -61,7 +70,8 @@ class Server {
     this.app.use(this.apiPaths.interaction, interactionRoutes);
     this.app.use(this.apiPaths.role, roleRoutes);
     this.app.use(this.apiPaths.protected, protectedRoutes);
-    this.app.use(this.apiPaths.admin, adminRoutes); // Añadir la nueva ruta
+    this.app.use(this.apiPaths.admin, adminRoutes);
+    this.app.use(this.apiPaths.compra, compraRoutes);
   }
 
   listen(): void {

@@ -22,6 +22,12 @@ const UsuarioSchema = new Schema({
     type: String,
     default: "",
   },
+  compras: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Compra",
+    },
+  ],
 });
 
 const UsuarioModel: Model<any> = model("Usuario", UsuarioSchema);

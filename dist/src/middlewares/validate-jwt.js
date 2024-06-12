@@ -4,7 +4,6 @@ exports.validateJWT = void 0;
 const jwt = require("jsonwebtoken");
 const validateJWT = (req, res, next) => {
     const token = req.header("x-token");
-    console.log("Token recibido en el backend:", token); // Log para verificar el token recibido
     if (!token) {
         console.log("No hay token en la petición");
         return res.status(401).json({

@@ -23,6 +23,12 @@ const UsuarioSchema = new mongoose_1.Schema({
         type: String,
         default: "",
     },
+    compras: [
+        {
+            type: mongoose_1.Schema.Types.ObjectId,
+            ref: "Compra",
+        },
+    ],
 });
 const UsuarioModel = (0, mongoose_1.model)("Usuario", UsuarioSchema);
 exports.default = UsuarioModel;

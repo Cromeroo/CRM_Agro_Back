@@ -12,8 +12,10 @@ const auth_route_1 = __importDefault(require("./routes/auth.route"));
 const interaction_route_1 = __importDefault(require("./routes/interaction.route"));
 const role_route_1 = __importDefault(require("./routes/role.route"));
 const protected_route_1 = __importDefault(require("./routes/protected.route"));
-const admin_route_1 = __importDefault(require("./routes/admin.route")); // Importar las nuevas rutas
+const admin_route_1 = __importDefault(require("./routes/admin.route"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const compra_route_1 = __importDefault(require("./routes/compra.route"));
+const path_1 = __importDefault(require("path"));
 class Server {
     constructor() {
         this.apiPaths = {
@@ -23,7 +25,8 @@ class Server {
             interaction: "/api/v1/interaction",
             role: "/api/v1/roles",
             protected: "/api/v1/protected",
-            admin: "/api/v1/admin", // Registrar la nueva ruta
+            admin: "/api/v1/admin",
+            compra: "/api/v1/producto/compras",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "3000";
@@ -45,6 +48,8 @@ class Server {
         // Lectura del Body
         this.app.use(express_1.default.json());
         this.app.use(body_parser_1.default.json());
+        // Servir archivos estáticos
+        this.app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "../uploads")));
         this.miPrimerApi();
     }
     routes() {
@@ -54,7 +59,8 @@ class Server {
         this.app.use(this.apiPaths.interaction, interaction_route_1.default);
         this.app.use(this.apiPaths.role, role_route_1.default);
         this.app.use(this.apiPaths.protected, protected_route_1.default);
-        this.app.use(this.apiPaths.admin, admin_route_1.default); // Añadir la nueva ruta
+        this.app.use(this.apiPaths.admin, admin_route_1.default);
+        this.app.use(this.apiPaths.compra, compra_route_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {
