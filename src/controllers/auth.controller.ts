@@ -123,21 +123,30 @@ export const olvidoContrasena = async (req: Request, resp: Response) => {
 
       const nombre = existeUsuario.nombre;
 
-      const templatePath = path.join(
-        __dirname,
-        "../templates/olvidoContrasena.html"
-      );
-
-      const emailTemplate = fs.readFileSync(templatePath, "utf8");
-
       const resetLink = `http://localhost:4200/reset-password?token=${encodeURIComponent(
         String(token)
       )}`;
-      const personalizarEmail = emailTemplate
-        .replace("{{name}}", nombre)
-        .replace("{{token}}", resetLink);
 
-      sendEmail(email, "Cambio de contraseña", personalizarEmail);
+      sendEmail(
+        email,
+        "Cambio de contraseña",
+        `<html>
+  <head>
+    <title>Cambio de contraseña</title>
+  </head>
+  <body>
+    <p>Hola ${nombre},</p>
+    <p>
+      Has solicitado un cambio de contraseña. Haz clic en el siguiente enlace
+      para cambiar tu contraseña:
+    </p>
+    <a href=${resetLink}
+      >Cambiar contraseña</a
+    >
+    <p>Si no solicitaste este cambio, ignora este correo.</p>
+  </body>
+</html>`
+      );
 
       resp.status(200).json({
         ok: true,
