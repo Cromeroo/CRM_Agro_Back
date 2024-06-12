@@ -90,7 +90,10 @@
 
     "copyfiles": "^2.4.1"
 
-  }
+  },
+  "bin" : {
+    "execute" : "app.js"
+}
 
 }
 
